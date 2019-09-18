@@ -12,6 +12,7 @@ ReactDOM.render(
         <BaseLayout>
             <Switch>
                 <Route path='/' exact component={AddSnippet}/>
+                {/* <Route path='/snippets' component={ViewSnippets}/> */}
             </Switch>
         </BaseLayout>
     </BrowserRouter>
