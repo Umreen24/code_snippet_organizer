@@ -75,7 +75,7 @@ app.post('/tags', (req, res) => {
 
 app.put('/snippets', (req, res) => {
 
-    const snippetId = req.body.postId
+    const snippetId = req.body.snippetId
     const title = req.body.title
     const description = req.body.description
 
@@ -90,6 +90,19 @@ app.put('/snippets', (req, res) => {
             res.json({error: 'Unable to update snippet!'})
         } else {
             res.json({success: true, message: 'Snippet updated!'})
+        }
+    });
+});
+
+app.delete('/snippets/:snippetId', (req, res) => {
+    
+    const snippetId = req.params.snippetId
+
+    Snippet.remove({_id: snippetId }, (error, result) => {
+        if(error) {
+            res.json({error: 'Unable to delete snippet!'})
+        } else {
+            res.json(result)
         }
     });
 });
