@@ -107,6 +107,19 @@ app.delete('/snippets/:snippetId', (req, res) => {
     });
 });
 
+app.get('/snippets/:snippetId', (req, res) => {
+    
+    const snippetId = req.params.snippetId
+
+    Snippet.findById(snippetId, ((error, snippet) => {
+        if(error) {
+            res.json({error: 'Unable to get snippet!'})
+        } else {
+            res.json(snippet)
+        }
+    }));
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}!`)
 })
