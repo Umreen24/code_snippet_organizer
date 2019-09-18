@@ -5,6 +5,7 @@ require('dotenv').config();
 const port = process.env.PORT
 const mongoose = require('mongoose');
 const Snippet = require('./schemas/snippet');
+const Tag = require('./schemas/tag');
 
 app.use(cors());
 app.use(express.json());
@@ -22,7 +23,7 @@ mongoose.connect(DB, {
     }
 });
 
-app.post('/add-snippet', (req, res) => {
+app.post('/snippets', (req, res) => {
 
     const title = req.body.title
     const description = req.body.description
@@ -47,6 +48,48 @@ app.get('/snippets', (req, res) => {
             res.json({error: 'Unable to load snippets!'})
         } else {
             res.json(snippets)
+        }
+    });
+});
+
+app.post('/tags', (req, res) => {
+
+    const snippetId = req.body.snippetId
+    const title = req.body.title
+
+    const tag = new Tag({
+        title: title
+    })
+
+    Snippet.findById(snippetId, (error, snippet) => {
+        snippet.tags.push(tag)
+        snippet.save(error => {
+            if(!error) {
+                res.json({success: true})
+            } else {
+                res.json({error})
+            }
+        });
+    });
+});
+
+app.put('/snippets', (req, res) => {
+
+    const snippetId = req.body.postId
+    const title = req.body.title
+    const description = req.body.description
+
+    const updatedSnippet = {
+        title: title,
+        snippetId: snippetId,
+        description: description
+    }
+
+    Snippet.findByIdAndUpdate(snippetId, updatedSnippet, (error, result) => {
+        if(error) {
+            res.json({error: 'Unable to update snippet!'})
+        } else {
+            res.json({success: true, message: 'Snippet updated!'})
         }
     });
 });
