@@ -42,16 +42,48 @@ app.post('/snippets', (req, res) => {
     });
 });
 
-app.get('/snippets', (req, res) => {
+app.get('/snippets', async (req, res) => {
+
+    //async-await to get all snippets
+    try{
+        const snippets = await Snippet.find({})
+        res.json(snippets)
+    } catch(error) {
+        res.json({error: 'Unable to get snippets!'})
+    }
+
+    /*
+    //using promises to get all snipppets
+    Snippet.find({}).then((snippets) => {
+        res.json(snippets)
+    }).catch(error => {
+        res.json({error: 'Unable to get snippets!'})
+    })*/
+
+    /*
+    //getting snippets using callbacks
     Snippet.find({}, (error, snippets) => {
         if(error) {
             res.json({error: 'Unable to load snippets!'})
         } else {
             res.json({success: true, snippets: snippets})
         }
-    });
+    });*/
 });
 
+app.post('/tags', async (req,res) => {
+
+    const snippetId = req.body.snippetId
+    const tagTitle = req.body.tagTitle
+
+    const tag = new Tag({snippetId: snippetId, tagTitle: tagTitle})
+
+   const result = await tag.save()
+   console.log(result)
+   res.send('ok')
+})
+
+/*
 app.post('/tags', (req, res) => {
 
     const snippetId = req.body.snippetId
@@ -71,7 +103,7 @@ app.post('/tags', (req, res) => {
             }
         });
     });
-});
+});*/
 
 app.put('/snippets', (req, res) => {
 
@@ -107,6 +139,7 @@ app.delete('/snippets/:snippetId', (req, res) => {
     });
 });
 
+/*
 app.get('/snippets/:snippetId', (req, res) => {
     
     const snippetId = req.params.snippetId
@@ -118,6 +151,17 @@ app.get('/snippets/:snippetId', (req, res) => {
             res.json(snippet)
         }
     }));
+});*/
+
+app.get('/snippets/:snippetId', async (req, res) => {
+    
+    const snippetId = req.params.snippetId
+
+    const snippet = await Snippet.findById(snippetId)
+    const tags = await Tag.find({
+        snippetId: snippetId
+    })
+    res.json({snippet: snippet, tags: tags})
 });
 
 app.listen(port, () => {
