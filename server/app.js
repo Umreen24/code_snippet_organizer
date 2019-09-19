@@ -47,7 +47,7 @@ app.get('/snippets', (req, res) => {
         if(error) {
             res.json({error: 'Unable to load snippets!'})
         } else {
-            res.json(snippets)
+            res.json({success: true, snippets: snippets})
         }
     });
 });
