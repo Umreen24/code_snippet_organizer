@@ -7,7 +7,7 @@ function ViewSnippets(props) {
 
     useEffect(() => {
         fetchSnippets()
-    }, [])
+    }, [props._id])
 
     const fetchSnippets = () => {
         fetch('http://localhost:3001/snippets')
