@@ -1,0 +1,86 @@
+
+body {
+    background-image: linear-gradient(to right, rgba(80, 203, 174, 0.776), rgb(16, 114, 99));
+}
+
+.menu {
+    list-style: none;
+    background-color: #28574d;
+    width: 2000px;
+    height: 50px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    text-shadow: 2px 2px 4px #000000;
+    margin: 10px;
+}
+
+.snip-main {
+    text-align: center;
+    font-family: sans-serif;
+    margin: 10px;
+    color: white;
+    font-size: 50px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.snip-sub {
+    text-align: left;
+    font-family: sans-serif;
+    margin: 27px;
+    color: white;
+    font-size: 30px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.snip-list {
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 15px;
+}
+
+.snips {
+    background-color: rgba(20, 54, 46, 0.776);
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
+.snips span {
+    text-align: center;
+}
+
+.add-snip {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 20px;
+    margin: 10px;
+    align-items: center;
+}
+
+.snip-title {
+    width: 200px;
+    height: 20px;
+    margin: 10px;
+}
+
+.snip-description {
+    width: 200px;
+    height: 20px;
+}
+
+button {
+    margin: 10px;
+}

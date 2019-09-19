@@ -1,6 +1,7 @@
 
 import React, {useState} from 'react';
 import axios from 'axios';
+import '../styles.css';
 
 function AddSnippet() {
 
@@ -23,10 +24,10 @@ function AddSnippet() {
     };
 
     return(
-        <div>
-            <h3>Add New Snippet</h3>
-            <input type='text' name='title' placeholder='Enter snippet title' onChange={(e) => handleTextChange(e)}/>
-            <input type='text' name='description' placeholder='Enter code snippet' onChange={(e) => handleTextChange(e)}/>
+        <div className='add-snip'>
+            <h3 className='snip-list'>Add New Snippet</h3>
+            <input className='snip-title' type='text' name='title' placeholder='Enter snippet title' onChange={(e) => handleTextChange(e)}/>
+            <input className='snip-description' type='text' name='description' placeholder='Enter code snippet' onChange={(e) => handleTextChange(e)}/>
             <button onClick={() => handleAddSnippet()}>Add Snippet</button>
         </div>
     )

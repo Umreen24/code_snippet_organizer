@@ -5,8 +5,8 @@ function BaseLayout(props) {
 
     return (
         <div>
+            <h1 className='snip-main'>Code Snippets</h1>
             <Menu/>
-            <h1>Code Snippets</h1>
             <div>{props.children}</div>
         </div>
     )
