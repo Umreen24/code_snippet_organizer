@@ -27,10 +27,12 @@ app.post('/snippets', (req, res) => {
 
     const title = req.body.title
     const description = req.body.description
+    const tag = req.body.tag
 
     const snippet = new Snippet({
         title: title,
-        description: description
+        description: description,
+        tag: tag
     })
 
     snippet.save((error) => {
@@ -47,7 +49,7 @@ app.get('/snippets', async (req, res) => {
     //async-await to get all snippets
     try{
         const snippets = await Snippet.find({})
-        res.json(snippets)
+        res.json({snippets: snippets})
     } catch(error) {
         res.json({error: 'Unable to get snippets!'})
     }
