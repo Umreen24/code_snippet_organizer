@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function Menu() {
 
     return( 
-        <ul>
+        <ul className='menu'>
             <li><NavLink to="/">Add Snippet</NavLink></li>
             <li><NavLink to="/snippets">View Snippet</NavLink></li>
         </ul>

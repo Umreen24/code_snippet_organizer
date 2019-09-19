@@ -1,6 +1,7 @@
 
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import '../styles.css';
 
 function ViewSnippets(props) {
 
@@ -18,12 +19,15 @@ function ViewSnippets(props) {
     }
 
     return <div>
-                {props.snippet.map(snip => {
-                return <div key={snip._id}>
-                            <h3>{snip.title}</h3>
-                            {snip.description}
-                        </div>
-                })}
+                <h2 className='snip-sub'>Community Snippets</h2>
+                <div className='snip-list'>
+                    {props.snippet.map(snip => {
+                    return <div className='snips' key={snip._id}>
+                                <h3>{snip.title}</h3>
+                                <span>{snip.description}</span>
+                            </div>
+                    })}
+                </div>
             </div>
 }
 
