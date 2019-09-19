@@ -25,6 +25,7 @@ function ViewSnippets(props) {
                     return <div className='snips' key={snip._id}>
                                 <h3>{snip.title}</h3>
                                 <span>{snip.description}</span>
+                                <span className='tag'>{snip.tag}</span>
                             </div>
                     })}
                 </div>

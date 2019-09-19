@@ -1,10 +1,16 @@
 
 const mongoose = require('mongoose'); 
-const Tag = require('./tag');
 
 const snippetSchema = new mongoose.Schema({
-    title: String,
-    description: String,
+    title: {
+        type: String,
+        required: [true, 'Please provide a snippet title!']
+    },
+    description: {
+        type: String,
+        required:[true, 'Please provide the code for this snippet!']
+    },
+    tag: String
 })
 
 const Snippet = mongoose.model('Snippet', snippetSchema)

@@ -5,12 +5,13 @@ import '../styles.css';
 
 function AddSnippet() {
 
-    const [snippet, setSnippet] = useState({title: '', description: ''})
+    const [snippet, setSnippet] = useState({title: '', description: '', tag: ''})
 
     const handleAddSnippet = () => {
         axios.post('http://localhost:3001/snippets', {
             title: snippet.title,
-            description: snippet.description
+            description: snippet.description,
+            tag: snippet.tag
         }).then(response => {
             console.log(response.data)
         })
@@ -26,8 +27,9 @@ function AddSnippet() {
     return(
         <div className='add-snip'>
             <h3 className='snip-list'>Add New Snippet</h3>
-            <input className='snip-title' type='text' name='title' placeholder='Enter snippet title' onChange={(e) => handleTextChange(e)}/>
+            <input className='snip-description' type='text' name='title' placeholder='Enter snippet title' onChange={(e) => handleTextChange(e)}/>
             <input className='snip-description' type='text' name='description' placeholder='Enter code snippet' onChange={(e) => handleTextChange(e)}/>
+            <input className='snip-description' type='text' name='tag' placeholder='Enter snippet tag' onChange={(e) => handleTextChange(e)}/>
             <button onClick={() => handleAddSnippet()}>Add Snippet</button>
         </div>
     )

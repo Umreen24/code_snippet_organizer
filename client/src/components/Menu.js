@@ -6,7 +6,7 @@ function Menu() {
     return( 
         <ul className='menu'>
             <li><NavLink to="/">Add Snippet</NavLink></li>
-            <li><NavLink to="/snippets">View Snippet</NavLink></li>
+            <li><NavLink to="/snippets">View Snippets</NavLink></li>
         </ul>
     )
 }
