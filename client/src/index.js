@@ -5,21 +5,28 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import BaseLayout from './components/BaseLayout';
 import AddSnippet from './components/AddSnippet';
+import ViewSnippets from './components/ViewSnippets';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './store/reducer';
+import thunk from 'redux-thunk';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
     
     <BrowserRouter>
+    <Provider store={store}>
         <BaseLayout>
             <Switch>
                 <Route path='/' exact component={AddSnippet}/>
-                {/* <Route path='/snippets' component={ViewSnippets}/> */}
+                <Route path='/snippets' component={ViewSnippets}/>
             </Switch>
         </BaseLayout>
+    </Provider>
     </BrowserRouter>
-    
-    
-    
-    
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
