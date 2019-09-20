@@ -38,13 +38,7 @@ app.post('/api/snippets', (req, res) => {
         tag: tag
     })
 
-    snippet.save((error) => {
-        if(error) {
-            res.json({error: 'Unable to save snippet!'})
-        } else {
-            res.json({success: true, message: 'Saved new snippet!'})
-        }
-    });
+    snippet.save();
 });
 
 app.get('/snippets', async (req, res) => {
