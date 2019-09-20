@@ -7,9 +7,11 @@ const mongoose = require('mongoose');
 const User = require('./schemas/user');
 const Snippet = require('./schemas/snippet');
 const Tag = require('./schemas/tag');
+const authentication = require('./authMiddleware');
 
 app.use(cors());
 app.use(express.json());
+app.all('/api/*', authentication);
 
 const DB = process.env.DATABASE.replace(
     '<PASSWORD>', process.env.DATABASE_PASSWORD
@@ -24,7 +26,7 @@ mongoose.connect(DB, {
     }
 });
 
-app.post('/snippets', (req, res) => {
+app.post('/api/snippets', (req, res) => {
 
     const title = req.body.title
     const description = req.body.description
@@ -57,7 +59,7 @@ app.get('/snippets', async (req, res) => {
 
 });
 
-app.post('/tags', async (req,res) => {
+app.post('/api/tags', async (req,res) => {
 
     const snippetId = req.body.snippetId
     const tagTitle = req.body.tagTitle
@@ -69,7 +71,7 @@ app.post('/tags', async (req,res) => {
    res.send('ok')
 })
 
-app.put('/update-snippet', (req, res) => {
+app.put('/api/update-snippet', (req, res) => {
 
     const id = req.body.id
     const title = req.body.title
@@ -92,7 +94,7 @@ app.put('/update-snippet', (req, res) => {
     });
 });
 
-app.delete('/snippets/:id', (req, res) => {
+app.delete('/api/snippets/:id', (req, res) => {
     
     const id = req.params.id
 
