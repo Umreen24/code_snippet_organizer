@@ -34,7 +34,7 @@ function ViewSnippets(props) {
     }
 
     return <div>
-                <h2 className='snip-sub'>Community Snippets</h2>
+                <h2 className='snip-sub'>Community Snippets - Log In to Add New Snippet!</h2>
                 <div className='snip-list'>
                     {snippets.map(snippet => {
                     return <div className='snips' key={snippet._id}>

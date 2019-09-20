@@ -3,6 +3,7 @@ import './App.css';
 import AddSnippet from './components/AddSnippet';
 import ViewSnippets from './components/ViewSnippets';
 import UpdateSnippet from './components/UpdateSnippet';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <AddSnippet/>
       <ViewSnippets/>
       <UpdateSnippet/>
+      <Register/>
     </div>
   );
 }
