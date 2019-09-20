@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT
 const mongoose = require('mongoose');
+const User = require('./schemas/user');
 const Snippet = require('./schemas/snippet');
 const Tag = require('./schemas/tag');
 
@@ -54,23 +55,6 @@ app.get('/snippets', async (req, res) => {
         res.json({error: 'Unable to get snippets!'})
     }
 
-    /*
-    //using promises to get all snipppets
-    Snippet.find({}).then((snippets) => {
-        res.json(snippets)
-    }).catch(error => {
-        res.json({error: 'Unable to get snippets!'})
-    })*/
-
-    /*
-    //getting snippets using callbacks
-    Snippet.find({}, (error, snippets) => {
-        if(error) {
-            res.json({error: 'Unable to load snippets!'})
-        } else {
-            res.json({success: true, snippets: snippets})
-        }
-    });*/
 });
 
 app.post('/tags', async (req,res) => {
@@ -84,28 +68,6 @@ app.post('/tags', async (req,res) => {
    console.log(result)
    res.send('ok')
 })
-
-/*
-app.post('/tags', (req, res) => {
-
-    const snippetId = req.body.snippetId
-    const title = req.body.title
-
-    const tag = new Tag({
-        title: title
-    })
-
-    Snippet.findById(snippetId, (error, snippet) => {
-        snippet.tags.push(tag)
-        snippet.save(error => {
-            if(!error) {
-                res.json({success: true})
-            } else {
-                res.json({error})
-            }
-        });
-    });
-});*/
 
 app.put('/update-snippet', (req, res) => {
 
@@ -143,20 +105,6 @@ app.delete('/snippets/:id', (req, res) => {
     });
 });
 
-/*
-app.get('/snippets/:snippetId', (req, res) => {
-    
-    const snippetId = req.params.snippetId
-
-    Snippet.findById(snippetId, ((error, snippet) => {
-        if(error) {
-            res.json({error: 'Unable to get snippet!'})
-        } else {
-            res.json(snippet)
-        }
-    }));
-});*/
-
 app.get('/snippets/:snippetId', async (req, res) => {
     
     const snippetId = req.params.snippetId
@@ -166,6 +114,31 @@ app.get('/snippets/:snippetId', async (req, res) => {
         snippetId: snippetId
     })
     res.json({snippet: snippet, tags: tags})
+});
+
+app.post('/register', async(req, res) => {
+    
+    try {
+        const user = new User(req.body)
+        await user.save()
+        res.json({user, message: 'Registration successful!'})
+    } catch (error) {
+        res.send(error)
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const {username, password} = req.body
+        const user = await User.findByCredentials(username, password)
+        if(!user) {
+            return res.json({error: 'Login failed! Check authentication credentials'})
+        }
+        const token = await user.generateAuthToken()
+        res.send({user, token})
+    } catch(error) {
+        res.send(error)
+    }
 });
 
 app.listen(port, () => {
