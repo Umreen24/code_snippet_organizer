@@ -41,6 +41,7 @@ function ViewSnippets(props) {
                                 <h3>{snippet.title}</h3>
                                 <span>{snippet.description}</span>
                                 <span className='tag'>{snippet.tag}</span>
+                                <span className='snippet-id'> Snippet ID: {snippet._id}</span>
                                 <button className='delete-btn' onClick={() => deleteSnippet(snippet._id)}>Delete Snippet</button>
                             </div>
                     })}

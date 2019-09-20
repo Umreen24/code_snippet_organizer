@@ -107,19 +107,21 @@ app.post('/tags', (req, res) => {
     });
 });*/
 
-app.put('/snippets', (req, res) => {
+app.put('/update-snippet', (req, res) => {
 
-    const snippetId = req.body.snippetId
+    const id = req.body.id
     const title = req.body.title
     const description = req.body.description
+    const tag = req.body.tag
 
     const updatedSnippet = {
         title: title,
-        snippetId: snippetId,
-        description: description
+        id: id,
+        description: description,
+        tag: tag
     }
 
-    Snippet.findByIdAndUpdate(snippetId, updatedSnippet, (error, result) => {
+    Snippet.findByIdAndUpdate(id, updatedSnippet, (error, result) => {
         if(error) {
             res.json({error: 'Unable to update snippet!'})
         } else {

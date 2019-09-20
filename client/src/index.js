@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import BaseLayout from './components/BaseLayout';
 import AddSnippet from './components/AddSnippet';
 import ViewSnippets from './components/ViewSnippets';
+import UpdateSnippet from './components/UpdateSnippet';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './store/reducer';
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Switch>
                 <Route path='/' exact component={AddSnippet}/>
                 <Route path='/snippets' component={ViewSnippets}/>
+                <Route path='/update-snippet' component={UpdateSnippet}/>
             </Switch>
         </BaseLayout>
     </Provider>
