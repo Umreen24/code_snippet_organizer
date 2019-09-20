@@ -1,24 +1,24 @@
 
 const initialState = {
-    snippets: []
-}
+    isAuthenticated: false
+};
 
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
-        case 'SNIPPETS_LOADED':
+        case 'ON_AUTHENTICATED':
             return {
                 ...state,
-                snippets: action.payload
+                isAuthenticated: action.token ? true:false
             }
-        case 'SNIPPET_DELETED':
+        case 'SIGN_OUT':
             return {
                 ...state,
-                snippets: action.payload
+                isAuthenticated: false
             }
             default:
                 return state
     }
-}
+};
 
 export default reducer; 

@@ -8,7 +8,7 @@ function AddSnippet() {
     const [snippet, setSnippet] = useState({title: '', description: '', tag: ''})
 
     const handleAddSnippet = () => {
-        axios.post('http://localhost:3001/snippets', {
+        axios.post('http://localhost:3001/api/snippets', {
             title: snippet.title,
             description: snippet.description,
             tag: snippet.tag

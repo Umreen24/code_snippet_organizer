@@ -1,23 +1,28 @@
 
 const jwt = require('jsonwebtoken');
+const User = require('./schemas/user');
 
-function authentication(req, res, next) {
+const authentication = async(req, res, next) => {
+
     let headers = req.headers['authorization']
 
     if(headers) {
         const token = headers.split(' ')[1]
-        var decoded = jwt.verify(token, process.env.JWT_SECRET)
-        const id = decoded._id
-        const persistedUser = User.find(u => u.id == id)
-        if(persistedUser) {
-            next()
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        if(decoded){
+            // const user = decoded.user
+            const persistedUser = await User.findOne({ _id: decoded._id, 'tokens.token': token})
+            if(persistedUser) {
+                next()
+            } else {
+                res.json({error: 'Invalid credentials!'})
+            }
         } else {
             res.json({error: 'Unauthorized access!'})
         }
     } else {
         res.json({error: 'Unauthorized access!'})
     }
-    next()
-}
+};
 
-module.exports = authentication; 
+module.exports = authentication;     

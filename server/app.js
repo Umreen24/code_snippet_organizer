@@ -38,7 +38,14 @@ app.post('/api/snippets', (req, res) => {
         tag: tag
     })
 
-    snippet.save();
+    snippet.save((error) => {
+        if(error) {
+            console.log(error)
+            res.json({error: 'Unable to save'})
+        } else {
+            res.json({success: true, message: 'Saved new post!'})
+        }
+    })
 });
 
 app.get('/snippets', async (req, res) => {
@@ -65,7 +72,7 @@ app.post('/api/tags', async (req,res) => {
    res.send('ok')
 })
 
-app.put('/api/update-snippet', (req, res) => {
+app.put('/update-snippet', (req, res) => {
 
     const id = req.body.id
     const title = req.body.title
@@ -88,7 +95,7 @@ app.put('/api/update-snippet', (req, res) => {
     });
 });
 
-app.delete('/api/snippets/:id', (req, res) => {
+app.delete('/snippets/:id', (req, res) => {
     
     const id = req.params.id
 
