@@ -128,11 +128,11 @@ app.put('/snippets', (req, res) => {
     });
 });
 
-app.delete('/snippets/:snippetId', (req, res) => {
+app.delete('/snippets/:id', (req, res) => {
     
-    const snippetId = req.params.snippetId
+    const id = req.params.id
 
-    Snippet.remove({_id: snippetId }, (error, result) => {
+    Snippet.remove({_id: id }, (error, result) => {
         if(error) {
             res.json({error: 'Unable to delete snippet!'})
         } else {

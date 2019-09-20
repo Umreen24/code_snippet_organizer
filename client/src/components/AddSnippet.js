@@ -30,7 +30,7 @@ function AddSnippet() {
             <input className='snip-description' type='text' name='title' placeholder='Enter snippet title' onChange={(e) => handleTextChange(e)}/>
             <input className='snip-description' type='text' name='description' placeholder='Enter code snippet' onChange={(e) => handleTextChange(e)}/>
             <input className='snip-description' type='text' name='tag' placeholder='Enter snippet tag' onChange={(e) => handleTextChange(e)}/>
-            <button onClick={() => handleAddSnippet()}>Add Snippet</button>
+            <button className='add-btn' onClick={() => handleAddSnippet()}>Add Snippet</button>
         </div>
     )
 }

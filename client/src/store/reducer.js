@@ -11,8 +11,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 snippets: action.payload
             }
-        default:
-            return state
+        case 'SNIPPET_DELETED':
+            return {
+                ...state,
+                snippets: action.payload
+            }
+            default:
+                return state
     }
 }
 
