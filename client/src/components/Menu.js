@@ -11,10 +11,10 @@ function Menu(props) {
 
     return( 
         <ul className='menu'>
-            <li><NavLink to="/register">Register Account</NavLink></li>
             <li><NavLink to="/login">Login</NavLink></li>
+            <li><NavLink to="/register">Register Account</NavLink></li>
             <li><NavLink to="/">View Snippets</NavLink></li>
-            {props.authenticated ? <li><NavLink to="/">Add Snippet</NavLink></li>: null}
+            {props.authenticated ? <li><NavLink to="/add-snippet">Add Snippet</NavLink></li>: null}
             {props.authenticated ? <li><NavLink to="/update-snippet">Update Snippet</NavLink></li>: null}
             { props.authenticated ? <li className="menu-list"><a onClick={() => handleSignOut()} href="#">Sign Out</a></li>: null}
         </ul>
